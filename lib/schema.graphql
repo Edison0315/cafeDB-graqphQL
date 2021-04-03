@@ -1,0 +1,39 @@
+type Categoria {
+    _id: ID!
+    nombre: String!   
+}
+
+type Product {
+    _id: ID!
+    nombre: String!
+    precio: String!
+    descripcion: String
+    estado: Boolean!
+    categoria: Categoria
+}
+
+type Query{
+    "Devuelve todos los productos"
+    getProducts: [Product]
+    "Devuelve un producto"
+    getProduct(id: ID!): Product
+}
+
+
+# Plantillas, esto es como modelos
+input ProductInput{
+    nombre: String!
+    precio: String!
+    descripcion: String
+    estado: Boolean!
+}
+
+# Operaciones permitidas
+type Mutation{
+    "Crea un producto"
+    createProduct(input: ProductInput!): Product
+    "Actualizar un producto por ID"
+    updateProduct(id: ID!, input: ProductInput!): Product
+    "Agrega categoria a un producto"
+    addCategoryToProduct(productID: ID!, categoryID: ID!): Product
+}
