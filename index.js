@@ -1,11 +1,11 @@
 require('dotenv').config()
 
 const { makeExecutableSchema } = require('graphql-tools')
-
-const express = require('express')
-const { graphqlHTTP } = require('express-graphql')
-const { readFileSync } = require('fs')
-const { join } = require('path')
+const express                  = require('express')
+const cors                     = require('cors')
+const { graphqlHTTP }          = require('express-graphql')
+const { readFileSync }         = require('fs')
+const { join }                 = require('path')
 
 const resolvers = require('./lib/resolvers')
 
@@ -22,6 +22,9 @@ const typeDefs = readFileSync(
     join(__dirname, 'lib', 'schema.graphql'),
     'utf-8'
 )
+
+// Configurar el cors
+app.use(cors())
 
 const schema = makeExecutableSchema({typeDefs, resolvers})
 
