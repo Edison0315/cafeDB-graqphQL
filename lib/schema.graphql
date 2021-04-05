@@ -1,3 +1,12 @@
+"Valida los tipos de importancia"
+enum Importancia {
+    alta,
+    media,
+    baja
+}
+
+union GlobalSearch = Product | Categoria
+
 type Categoria {
     _id: ID!
     nombre: String!   
@@ -10,6 +19,7 @@ type Product {
     descripcion: String
     estado: Boolean!
     categoria: Categoria
+    importancia: Importancia
 }
 
 type Query{
@@ -17,6 +27,8 @@ type Query{
     getProducts: [Product]
     "Devuelve un producto"
     getProduct(id: ID!): Product
+    "Ejecuta una busqueda global"
+    searchItems(keyword: String!): [GlobalSearch]
 }
 
 
@@ -26,6 +38,7 @@ input ProductInput{
     precio: String!
     descripcion: String
     estado: Boolean!
+    importancia: Importancia
 }
 
 # Operaciones permitidas
